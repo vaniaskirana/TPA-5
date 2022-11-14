@@ -1,24 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Form } from './components/Form';
+import { Todos } from './components/Todos';
+import { useState } from 'react';
+// import { useSelector } from 'react-redux';
 
 function App() {
+  const [updateFormVisibility, setupdateFormVisibility] = useState(false)
+  
+  const [editTodo, setEditTodo] = useState('')
+  
+  const handleUpdateClick = (todo) => {
+    setupdateFormVisibility(true)
+    setEditTodo(todo)
+  }
+
+
+  const cancelUpdate = () => {
+    setupdateFormVisibility(false);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className='wrapper text-center formutama dataBg'>
+        <br/>
+        <h1 className='text-center'>Todo-App</h1>
+        <img src="/img/reduxIco.png" width={300} />
+        <Form updateFormVisibility={updateFormVisibility} editTodo={editTodo} cancelUpdate={cancelUpdate}/>
+        <Todos handleUpdateClick={handleUpdateClick} updateFormVisibility={updateFormVisibility}/>
+      </div>  
+    </>
   );
 }
 
